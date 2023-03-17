@@ -6,6 +6,8 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
+
+// Variable
 const char* ssid = "EcoleDuWeb5.0g";
 const char* password = "EcoleDuWEB";
 const char MQTT_SERVER[] = "172.16.5.103";
@@ -79,16 +81,16 @@ void mqttPubSub(void)
     }
     else
     {
-      // Check if data is available
+      // Regarde si les données sont présente 
       if(ccs.available()) 
       {
         if(!ccs.readData())
         {
-          // Read data from the sensor
+          // Lecture des donées du senseur de CO2
           float eCO2 = ccs.geteCO2();
           float TVOC = ccs.getTVOC();
 
-          // Print the data to the serial monitor
+          // Affiche les données
           Serial.print("eCO2: ");
           Serial.print(eCO2);
           Serial.print(" ppm, TVOC: ");
@@ -138,7 +140,7 @@ void setup()
     while(1);
    }
 
-  // Wait for the sensor to start
+  // Attente avant que le capteur se lance 
   delay(100);
 }
 
