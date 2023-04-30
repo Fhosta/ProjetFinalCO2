@@ -5,6 +5,7 @@
 #include <SPI.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <WiFiManager.h>
 
 
 // Variable
@@ -25,25 +26,7 @@ Adafruit_CCS811 ccs;
 
 
 
-void setup_wifi() 
-{
-  delay(500);
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
 
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-}
 
 void messageHandler(char *topic, uint8_t *payload, unsigned int len)
 {
@@ -132,7 +115,15 @@ void reconnect()
 void setup() 
 {
   Serial.begin(9600);
-  setup_wifi();
+
+  WiFiManager wifiManager;
+
+  if (!wifiManager.autoConnect("EspCO2")){
+        Serial.println("Connexion non établie.");
+    }
+    else {
+        Serial.println("Connecté au réseau.");
+    }
 
   if(!ccs.begin())
   {
