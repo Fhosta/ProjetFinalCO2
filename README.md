@@ -15,7 +15,7 @@
  * CCS811 :
  - 	 adafruit/Adafruit CCS811 Library@^1.1.1
   
- * Publisher  Subscriber :
+ * Publisher & Subscriber :
  - 		knolleary/PubSubClient@^2.8
 
 
